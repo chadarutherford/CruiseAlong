@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		639BFFAD240C133100A0D635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BFFAC240C133100A0D635 /* AppDelegate.swift */; };
 		639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BFFAE240C133100A0D635 /* SceneDelegate.swift */; };
-		639BFFB1240C133100A0D635 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BFFB0240C133100A0D635 /* ViewController.swift */; };
-		639BFFB4240C133100A0D635 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 639BFFB2240C133100A0D635 /* Main.storyboard */; };
 		639BFFB6240C133200A0D635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 639BFFB5240C133200A0D635 /* Assets.xcassets */; };
 		639BFFB9240C133200A0D635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 639BFFB7240C133200A0D635 /* LaunchScreen.storyboard */; };
 		639BFFC4240C133200A0D635 /* Cruise_AlongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BFFC3240C133200A0D635 /* Cruise_AlongTests.swift */; };
@@ -38,8 +36,6 @@
 		639BFFA9240C133100A0D635 /* Cruise Along.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cruise Along.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		639BFFAC240C133100A0D635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		639BFFAE240C133100A0D635 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		639BFFB0240C133100A0D635 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		639BFFB3240C133100A0D635 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		639BFFB5240C133200A0D635 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		639BFFB8240C133200A0D635 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		639BFFBA240C133200A0D635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,13 +95,11 @@
 		639BFFAB240C133100A0D635 /* Cruise Along */ = {
 			isa = PBXGroup;
 			children = (
-				639BFFAC240C133100A0D635 /* AppDelegate.swift */,
-				639BFFAE240C133100A0D635 /* SceneDelegate.swift */,
-				639BFFB0240C133100A0D635 /* ViewController.swift */,
-				639BFFB2240C133100A0D635 /* Main.storyboard */,
-				639BFFB5240C133200A0D635 /* Assets.xcassets */,
-				639BFFB7240C133200A0D635 /* LaunchScreen.storyboard */,
-				639BFFBA240C133200A0D635 /* Info.plist */,
+				639BFFDF240C139A00A0D635 /* Model */,
+				639BFFDE240C139500A0D635 /* View */,
+				639BFFDD240C138C00A0D635 /* Controller */,
+				639BFFE0240C13A100A0D635 /* Utilities */,
+				639BFFDC240C137300A0D635 /* Support */,
 			);
 			path = "Cruise Along";
 			sourceTree = "<group>";
@@ -126,6 +120,46 @@
 				639BFFD0240C133200A0D635 /* Info.plist */,
 			);
 			path = "Cruise AlongUITests";
+			sourceTree = "<group>";
+		};
+		639BFFDC240C137300A0D635 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				639BFFB7240C133200A0D635 /* LaunchScreen.storyboard */,
+				639BFFAC240C133100A0D635 /* AppDelegate.swift */,
+				639BFFAE240C133100A0D635 /* SceneDelegate.swift */,
+				639BFFB5240C133200A0D635 /* Assets.xcassets */,
+				639BFFBA240C133200A0D635 /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		639BFFDD240C138C00A0D635 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		639BFFDE240C139500A0D635 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		639BFFDF240C139A00A0D635 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		639BFFE0240C13A100A0D635 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +268,6 @@
 			files = (
 				639BFFB9240C133200A0D635 /* LaunchScreen.storyboard in Resources */,
 				639BFFB6240C133200A0D635 /* Assets.xcassets in Resources */,
-				639BFFB4240C133100A0D635 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +292,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				639BFFB1240C133100A0D635 /* ViewController.swift in Sources */,
 				639BFFAD240C133100A0D635 /* AppDelegate.swift in Sources */,
 				639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +329,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		639BFFB2240C133100A0D635 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				639BFFB3240C133100A0D635 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		639BFFB7240C133200A0D635 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -436,7 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7DFWNNEL3;
-				INFOPLIST_FILE = "Cruise Along/Info.plist";
+				INFOPLIST_FILE = "Cruise Along/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,7 +478,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7DFWNNEL3;
-				INFOPLIST_FILE = "Cruise Along/Info.plist";
+				INFOPLIST_FILE = "Cruise Along/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
