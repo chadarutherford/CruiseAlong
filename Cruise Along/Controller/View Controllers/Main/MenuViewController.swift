@@ -10,5 +10,11 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
+    var tableView: UITableView!
     weak var delegate: RoutingViewControllerDelegate?
+//    var addresses = [Address]()
+    
+    override func viewDidLoad() {
+        
+    }
 }

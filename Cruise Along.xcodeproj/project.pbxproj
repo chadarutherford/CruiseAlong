@@ -35,6 +35,10 @@
 		63C9B60E240D9675006D587B /* CAButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B606240D9674006D587B /* CAButton.swift */; };
 		63C9B60F240D9675006D587B /* SignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B607240D9674006D587B /* SignInWithAppleButton.swift */; };
 		63C9B611240D976F006D587B /* CardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B610240D976F006D587B /* CardState.swift */; };
+		63C9B615240DA533006D587B /* CoreDataCloudKitStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B614240DA533006D587B /* CoreDataCloudKitStack.swift */; };
+		63C9B618240DA6D9006D587B /* CruiseAlong.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B616240DA6D9006D587B /* CruiseAlong.xcdatamodeld */; };
+		63C9B61A240DA73A006D587B /* Address+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B619240DA73A006D587B /* Address+Convenience.swift */; };
+		63C9B61C240DA753006D587B /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B61B240DA753006D587B /* AddressType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +93,10 @@
 		63C9B606240D9674006D587B /* CAButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAButton.swift; sourceTree = "<group>"; };
 		63C9B607240D9674006D587B /* SignInWithAppleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWithAppleButton.swift; sourceTree = "<group>"; };
 		63C9B610240D976F006D587B /* CardState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardState.swift; sourceTree = "<group>"; };
+		63C9B614240DA533006D587B /* CoreDataCloudKitStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCloudKitStack.swift; sourceTree = "<group>"; };
+		63C9B617240DA6D9006D587B /* CruiseAlong.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CruiseAlong.xcdatamodel; sourceTree = "<group>"; };
+		63C9B619240DA73A006D587B /* Address+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+Convenience.swift"; sourceTree = "<group>"; };
+		63C9B61B240DA753006D587B /* AddressType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +222,8 @@
 		639BFFDF240C139A00A0D635 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				63C9B5EE240D82B2006D587B /* SearchAddress.swift */,
+				63C9B613240DA51A006D587B /* CoreData and CloudKit */,
+				63C9B612240DA4F9006D587B /* Models */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,6 +291,7 @@
 				63C9B5E5240D7968006D587B /* MenuOption.swift */,
 				63C9B5FD240D8D38006D587B /* Errors.swift */,
 				63C9B610240D976F006D587B /* CardState.swift */,
+				63C9B61B240DA753006D587B /* AddressType.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -298,6 +308,24 @@
 				63C9B607240D9674006D587B /* SignInWithAppleButton.swift */,
 			);
 			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		63C9B612240DA4F9006D587B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63C9B5EE240D82B2006D587B /* SearchAddress.swift */,
+				63C9B619240DA73A006D587B /* Address+Convenience.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		63C9B613240DA51A006D587B /* CoreData and CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				63C9B614240DA533006D587B /* CoreDataCloudKitStack.swift */,
+				63C9B616240DA6D9006D587B /* CruiseAlong.xcdatamodeld */,
+			);
+			path = "CoreData and CloudKit";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,8 +465,10 @@
 				63C9B5ED240D819C006D587B /* Notifications.swift in Sources */,
 				63C9B5E4240D78F4006D587B /* RoutingViewControllerDelegate.swift in Sources */,
 				63C9B5E6240D7968006D587B /* MenuOption.swift in Sources */,
+				63C9B615240DA533006D587B /* CoreDataCloudKitStack.swift in Sources */,
 				639BFFAD240C133100A0D635 /* AppDelegate.swift in Sources */,
 				63C9B60A240D9674006D587B /* CABodyLabel.swift in Sources */,
+				63C9B618240DA6D9006D587B /* CruiseAlong.xcdatamodeld in Sources */,
 				63C9B5F8240D8B9A006D587B /* NetworkDataLoader.swift in Sources */,
 				63C9B5EF240D82B2006D587B /* SearchAddress.swift in Sources */,
 				638A82A6240D76860068745E /* ContainerViewController.swift in Sources */,
@@ -446,6 +476,7 @@
 				639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */,
 				638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */,
 				63C9B609240D9674006D587B /* CAAlertVC.swift in Sources */,
+				63C9B61C240DA753006D587B /* AddressType.swift in Sources */,
 				63C9B611240D976F006D587B /* CardState.swift in Sources */,
 				63C9B60E240D9675006D587B /* CAButton.swift in Sources */,
 				638A82AA240D77680068745E /* MenuViewController.swift in Sources */,
@@ -453,6 +484,7 @@
 				63C9B5F6240D8AF1006D587B /* URLSession+NetworkDataLoader.swift in Sources */,
 				63C9B5E9240D7B63006D587B /* Constants.swift in Sources */,
 				63C9B60C240D9674006D587B /* CASettingsButton.swift in Sources */,
+				63C9B61A240DA73A006D587B /* Address+Convenience.swift in Sources */,
 				63C9B608240D9674006D587B /* CAAlertContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -779,6 +811,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		63C9B616240DA6D9006D587B /* CruiseAlong.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				63C9B617240DA6D9006D587B /* CruiseAlong.xcdatamodel */,
+			);
+			currentVersion = 63C9B617240DA6D9006D587B /* CruiseAlong.xcdatamodel */;
+			path = CruiseAlong.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 639BFFA1240C133000A0D635 /* Project object */;
 }
