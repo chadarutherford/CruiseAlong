@@ -39,6 +39,9 @@
 		63C9B618240DA6D9006D587B /* CruiseAlong.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B616240DA6D9006D587B /* CruiseAlong.xcdatamodeld */; };
 		63C9B61A240DA73A006D587B /* Address+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B619240DA73A006D587B /* Address+Convenience.swift */; };
 		63C9B61C240DA753006D587B /* AddressType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B61B240DA753006D587B /* AddressType.swift */; };
+		63C9B61E240DA855006D587B /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B61D240DA855006D587B /* UIViewController+Ext.swift */; };
+		63C9B621240DACFA006D587B /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B620240DACFA006D587B /* SettingsTableViewCell.swift */; };
+		63C9B623240DB049006D587B /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B622240DB049006D587B /* AddressTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,9 @@
 		63C9B617240DA6D9006D587B /* CruiseAlong.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CruiseAlong.xcdatamodel; sourceTree = "<group>"; };
 		63C9B619240DA73A006D587B /* Address+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Address+Convenience.swift"; sourceTree = "<group>"; };
 		63C9B61B240DA753006D587B /* AddressType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressType.swift; sourceTree = "<group>"; };
+		63C9B61D240DA855006D587B /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		63C9B620240DACFA006D587B /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		63C9B622240DB049006D587B /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +220,7 @@
 		639BFFDE240C139500A0D635 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				63C9B61F240DACEA006D587B /* Cells */,
 				63C9B5FF240D9674006D587B /* Custom Views */,
 			);
 			path = View;
@@ -271,6 +278,7 @@
 		63C9B5EB240D8184006D587B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				63C9B61D240DA855006D587B /* UIViewController+Ext.swift */,
 				63C9B5EC240D819C006D587B /* Notifications.swift */,
 				63C9B5F5240D8AF1006D587B /* URLSession+NetworkDataLoader.swift */,
 			);
@@ -326,6 +334,15 @@
 				63C9B616240DA6D9006D587B /* CruiseAlong.xcdatamodeld */,
 			);
 			path = "CoreData and CloudKit";
+			sourceTree = "<group>";
+		};
+		63C9B61F240DACEA006D587B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				63C9B620240DACFA006D587B /* SettingsTableViewCell.swift */,
+				63C9B622240DB049006D587B /* AddressTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,6 +478,7 @@
 			files = (
 				63C9B5FB240D8C52006D587B /* APIController.swift in Sources */,
 				63C9B60F240D9675006D587B /* SignInWithAppleButton.swift in Sources */,
+				63C9B61E240DA855006D587B /* UIViewController+Ext.swift in Sources */,
 				63C9B5FE240D8D38006D587B /* Errors.swift in Sources */,
 				63C9B5ED240D819C006D587B /* Notifications.swift in Sources */,
 				63C9B5E4240D78F4006D587B /* RoutingViewControllerDelegate.swift in Sources */,
@@ -470,9 +488,11 @@
 				63C9B60A240D9674006D587B /* CABodyLabel.swift in Sources */,
 				63C9B618240DA6D9006D587B /* CruiseAlong.xcdatamodeld in Sources */,
 				63C9B5F8240D8B9A006D587B /* NetworkDataLoader.swift in Sources */,
+				63C9B623240DB049006D587B /* AddressTableViewCell.swift in Sources */,
 				63C9B5EF240D82B2006D587B /* SearchAddress.swift in Sources */,
 				638A82A6240D76860068745E /* ContainerViewController.swift in Sources */,
 				63C9B5E1240D7835006D587B /* RoutingController.swift in Sources */,
+				63C9B621240DACFA006D587B /* SettingsTableViewCell.swift in Sources */,
 				639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */,
 				638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */,
 				63C9B609240D9674006D587B /* CAAlertVC.swift in Sources */,

@@ -68,7 +68,7 @@ class AddressSearchViewController: UIViewController {
         tableView.dataSource = self
         handleBar.layer.cornerRadius = 3.5
         handleBar.layer.masksToBounds = true
-//        tableView.register("", forCellReuseIdentifier: "")
+        tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: AddressTableViewCell.reuseID)
     }
     
     private func clearOutTableView() {
