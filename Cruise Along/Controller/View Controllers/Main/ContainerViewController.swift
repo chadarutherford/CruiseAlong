@@ -23,7 +23,7 @@ class ContainerViewController: UIViewController {
     }
     
     private func configureRoutingController() {
-        let routingController = RoutingController()
+        let routingController = RoutingViewController()
         routingController.delegate = self
         centerController = UINavigationController(rootViewController: routingController)
         centerController.view.isUserInteractionEnabled = true

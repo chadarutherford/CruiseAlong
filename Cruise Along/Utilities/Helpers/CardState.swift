@@ -1,13 +1,14 @@
 //
-//  AddressSearchViewController.swift
+//  CardState.swift
 //  Cruise Along
 //
 //  Created by Chad Rutherford on 3/2/20.
 //  Copyright © 2020 Chad Rutherford. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class AddressSearchViewController: UIViewController {
-    
+enum CardState {
+    case collapsed
+    case expanded
 }

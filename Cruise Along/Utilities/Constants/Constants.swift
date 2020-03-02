@@ -14,3 +14,8 @@ enum Images {
     static let workAddress = "briefcase"
     static let logout = "arrow.left.square"
 }
+
+enum APIKeys {
+    static let baseURL = "https://api.tomtom.com/search/2/search/"
+    static let apiKey = "9fAquYIwQ4Aj3NRv3U28jM60VhBID1vR"
+}
