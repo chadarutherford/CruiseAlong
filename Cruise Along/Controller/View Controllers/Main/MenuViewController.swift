@@ -67,15 +67,15 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
-//        let homeAddress = addresses[0]
-//        let workAddress = addresses[1]
+        let homeAddress = addresses[0]
+        let workAddress = addresses[1]
         if indexPath.row == 0 {
             cell.isUserInteractionEnabled = false
-//            cell.detailLabel.text = homeAddress.name
+            cell.detailLabel.text = homeAddress.name
         } else if indexPath.row == 1 {
-//            cell.address = homeAddress
+            cell.address = homeAddress
         } else if indexPath.row == 2 {
-//            cell.address = workAddress
+            cell.address = workAddress
         } else {
             cell.detailLabel.text = ""
         }
@@ -83,7 +83,6 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let menuOption = MenuOption(rawValue: indexPath.row)
         delegate?.handleMenuToggle()
         if indexPath.row == 1 {
             let address = addresses[0]
@@ -93,6 +92,11 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             let address = addresses[1]
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
+        } else if indexPath.row == 3 {
+            NotificationCenter.default.post(name: .logOutButtonSelected, object: self)
+            let loginVC = LoginViewController()
+            loginVC.modalPresentationStyle = .fullScreen
+            self.present(loginVC, animated: true)
         }
     }
 }

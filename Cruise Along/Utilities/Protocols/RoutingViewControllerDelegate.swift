@@ -10,5 +10,4 @@ import Foundation
 
 protocol RoutingViewControllerDelegate: AnyObject {
     func handleMenuToggle()
-//    func didSelectAddress(_ address: Address)
 }

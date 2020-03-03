@@ -10,4 +10,5 @@ import Foundation
 
 extension Notification.Name {
     static let addressWasSelected = Notification.Name("addressSelectedNotification")
+    static let logOutButtonSelected = Notification.Name("logOutSelectedNotification")
 }

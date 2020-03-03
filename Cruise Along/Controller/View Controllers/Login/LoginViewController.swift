@@ -38,12 +38,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        addObserverForAppleIDChangeNotification()
+        addObservers()
         performExistingAccountSetupFlows()
     }
     
-    private func addObserverForAppleIDChangeNotification() {
+    private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(appleIDStatusChanged), name: ASAuthorizationAppleIDProvider.credentialRevokedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logOutButtonSelected, object: nil)
     }
     
     private func performExistingAccountSetupFlows() {
@@ -106,8 +107,8 @@ class LoginViewController: UIViewController {
         authorizationController.performRequests()
     }
     
-    private func logout() {
-        
+    @objc private func logout() {
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKeys.userIdKey)
     }
     
     func signIn(with name: String) {
@@ -133,6 +134,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             if let firstName = credential.fullName?.givenName, let lastName = credential.fullName?.familyName {
                 let name = "\(firstName) \(lastName)"
                 signIn(with: name)
+            } else {
+                let containerVC = ContainerViewController()
+                containerVC.modalPresentationStyle = .fullScreen
+                present(containerVC, animated: true)
             }
             UserDefaults.standard.set(credential.user, forKey: UserDefaultsKeys.userIdKey)
         default:
