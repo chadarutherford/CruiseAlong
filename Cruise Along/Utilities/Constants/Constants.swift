@@ -13,10 +13,15 @@ enum Images {
     static let homeAddress = "house"
     static let workAddress = "briefcase"
     static let logout = "arrow.left.square"
+    static let background = "onboardingBackground"
 }
 
 enum APIKeys {
     static let baseAddressURL = "https://api.tomtom.com/search/2/search/"
     static let apiKey = "9fAquYIwQ4Aj3NRv3U28jM60VhBID1vR"
     static let baseRouteURL = "https://api.tomtom.com/routing/1/calculateRoute"
+}
+
+enum UserDefaultsKeys {
+    static let userIdKey = "UserID"
 }

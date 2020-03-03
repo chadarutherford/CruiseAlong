@@ -249,7 +249,6 @@ class RoutingViewController: UIViewController {
         let geodesic = MKGeodesicPolyline(coordinates: coordinates, count: locationCount)
         mapView.addOverlay(geodesic)
         setVisibleMapArea(with: geodesic, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
-        self.mapView.setUserTrackingMode(.follow, animated: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.centerViewOnUserLocation(with: 100)
         }

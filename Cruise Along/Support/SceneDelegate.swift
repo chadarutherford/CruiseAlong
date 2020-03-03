@@ -19,8 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let containerVC = ContainerViewController()
-        window?.rootViewController = containerVC
-        window?.makeKeyAndVisible()
+        if UserDefaults.standard.string(forKey: UserDefaultsKeys.userIdKey) == nil {
+            let loginVC = LoginViewController()
+            window?.rootViewController = loginVC
+            window?.makeKeyAndVisible()
+        } else {
+            let containerVC = ContainerViewController()
+            window?.rootViewController = containerVC
+            window?.makeKeyAndVisible()
+        }
     }
 }

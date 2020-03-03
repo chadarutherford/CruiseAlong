@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
-    static let reuseID = "SettingsCell"
+    static let reuseID = String(describing: self)
     
     let iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,11 +39,11 @@ class SettingsTableViewCell: UITableViewCell {
     }()
     
     var address: Address?
-//    {
-//        didSet {
-//            updateViews()
-//        }
-//    }
+    {
+        didSet {
+            updateViews()
+        }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
