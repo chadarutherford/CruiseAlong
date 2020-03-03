@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		637B6251240E9F0700123647 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6250240E9F0700123647 /* LoginViewController.swift */; };
-		637B6254240EA78C00123647 /* OnboardingFlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6253240EA78C00123647 /* OnboardingFlowDelegate.swift */; };
+		637B6258240EA89C00123647 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637B6257240EA89C00123647 /* CloudKit.framework */; };
+		637B625A240EABE900123647 /* HomeAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6259240EABE900123647 /* HomeAddressViewController.swift */; };
 		638A82A6240D76860068745E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A5240D76860068745E /* ContainerViewController.swift */; };
 		638A82AA240D77680068745E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A9240D77680068745E /* MenuViewController.swift */; };
 		638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82AB240D77870068745E /* AddressSearchViewController.swift */; };
@@ -69,7 +70,9 @@
 
 /* Begin PBXFileReference section */
 		637B6250240E9F0700123647 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		637B6253240EA78C00123647 /* OnboardingFlowDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlowDelegate.swift; sourceTree = "<group>"; };
+		637B6255240EA89000123647 /* Cruise Along.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cruise Along.entitlements"; sourceTree = "<group>"; };
+		637B6257240EA89C00123647 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		637B6259240EABE900123647 /* HomeAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAddressViewController.swift; sourceTree = "<group>"; };
 		638A82A5240D76860068745E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		638A82A9240D77680068745E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		638A82AB240D77870068745E /* AddressSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				637B6258240EA89C00123647 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,8 +150,17 @@
 			isa = PBXGroup;
 			children = (
 				637B6250240E9F0700123647 /* LoginViewController.swift */,
+				637B6259240EABE900123647 /* HomeAddressViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		637B6256240EA89C00123647 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				637B6257240EA89C00123647 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		638A82A7240D77430068745E /* View Controllers */ = {
@@ -173,6 +186,7 @@
 				639BFFC2240C133200A0D635 /* Cruise AlongTests */,
 				639BFFCD240C133200A0D635 /* Cruise AlongUITests */,
 				639BFFAA240C133100A0D635 /* Products */,
+				637B6256240EA89C00123647 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,6 +203,7 @@
 		639BFFAB240C133100A0D635 /* Cruise Along */ = {
 			isa = PBXGroup;
 			children = (
+				637B6255240EA89000123647 /* Cruise Along.entitlements */,
 				639BFFDF240C139A00A0D635 /* Model */,
 				639BFFDE240C139500A0D635 /* View */,
 				639BFFDD240C138C00A0D635 /* Controller */,
@@ -275,7 +290,6 @@
 			children = (
 				63C9B5E3240D78F4006D587B /* RoutingViewControllerDelegate.swift */,
 				63C9B5F7240D8B9A006D587B /* NetworkDataLoader.swift */,
-				637B6253240EA78C00123647 /* OnboardingFlowDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -521,7 +535,6 @@
 				63C9B621240DACFA006D587B /* SettingsTableViewCell.swift in Sources */,
 				639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */,
 				63C9B625240DBCB9006D587B /* FormatUtilities.swift in Sources */,
-				637B6254240EA78C00123647 /* OnboardingFlowDelegate.swift in Sources */,
 				638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */,
 				63C9B609240D9674006D587B /* CAAlertVC.swift in Sources */,
 				637B6251240E9F0700123647 /* LoginViewController.swift in Sources */,
@@ -529,6 +542,7 @@
 				63C9B61C240DA753006D587B /* AddressType.swift in Sources */,
 				63C9B611240D976F006D587B /* CardState.swift in Sources */,
 				63C9B60E240D9675006D587B /* CAButton.swift in Sources */,
+				637B625A240EABE900123647 /* HomeAddressViewController.swift in Sources */,
 				638A82AA240D77680068745E /* MenuViewController.swift in Sources */,
 				63C9B60D240D9674006D587B /* CATitleLabel.swift in Sources */,
 				63C9B5F6240D8AF1006D587B /* URLSession+NetworkDataLoader.swift in Sources */,
@@ -703,6 +717,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Cruise Along/Cruise Along.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7DFWNNEL3;
 				ENABLE_BITCODE = NO;
@@ -722,6 +737,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Cruise Along/Cruise Along.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7DFWNNEL3;
 				INFOPLIST_FILE = "Cruise Along/Support/Info.plist";

@@ -7,7 +7,6 @@
 //
 
 import AuthenticationServices
-import SwiftUI
 import UIKit
 
 class LoginViewController: UIViewController {
@@ -35,7 +34,6 @@ class LoginViewController: UIViewController {
     }()
     
     var user: ASAuthorizationAppleIDCredential?
-    weak var delegate: OnboardingFlowDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +111,9 @@ class LoginViewController: UIViewController {
     }
     
     func signIn(with name: String) {
-        delegate?.didLogIn(with: name)
+        let homeAddressVC = HomeAddressViewController()
+        homeAddressVC.name = name
+        self.present(homeAddressVC, animated: true)
     }
 }
 
@@ -136,22 +136,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             UserDefaults.standard.set(credential.user, forKey: UserDefaultsKeys.userIdKey)
         default:
             break
-        }
-    }
-}
-
-struct LoginPreview: PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        func updateUIViewController(_ uiViewController: LoginPreview.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<LoginPreview.ContainerView>) {
-            
-        }
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<LoginPreview.ContainerView>) -> UIViewController {
-            return LoginViewController()
         }
     }
 }
