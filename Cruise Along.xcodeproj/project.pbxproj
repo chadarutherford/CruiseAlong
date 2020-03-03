@@ -11,6 +11,8 @@
 		637B6258240EA89C00123647 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637B6257240EA89C00123647 /* CloudKit.framework */; };
 		637B625A240EABE900123647 /* HomeAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6259240EABE900123647 /* HomeAddressViewController.swift */; };
 		637B625C240EB79B00123647 /* WorkAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B625B240EB79B00123647 /* WorkAddressViewController.swift */; };
+		637B625E240ED78E00123647 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B625D240ED78E00123647 /* ConcurrentOperation.swift */; };
+		637B6260240ED7B500123647 /* FetchAddressesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B625F240ED7B500123647 /* FetchAddressesOperation.swift */; };
 		638A82A6240D76860068745E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A5240D76860068745E /* ContainerViewController.swift */; };
 		638A82AA240D77680068745E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A9240D77680068745E /* MenuViewController.swift */; };
 		638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82AB240D77870068745E /* AddressSearchViewController.swift */; };
@@ -75,6 +77,8 @@
 		637B6257240EA89C00123647 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		637B6259240EABE900123647 /* HomeAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAddressViewController.swift; sourceTree = "<group>"; };
 		637B625B240EB79B00123647 /* WorkAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAddressViewController.swift; sourceTree = "<group>"; };
+		637B625D240ED78E00123647 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		637B625F240ED7B500123647 /* FetchAddressesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAddressesOperation.swift; sourceTree = "<group>"; };
 		638A82A5240D76860068745E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		638A82A9240D77680068745E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		638A82AB240D77870068745E /* AddressSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
@@ -329,7 +333,9 @@
 		63C9B5F9240D8C41006D587B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				637B625D240ED78E00123647 /* ConcurrentOperation.swift */,
 				63C9B5FA240D8C52006D587B /* APIController.swift */,
+				637B625F240ED7B500123647 /* FetchAddressesOperation.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -520,9 +526,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C9B5FB240D8C52006D587B /* APIController.swift in Sources */,
+				637B6260240ED7B500123647 /* FetchAddressesOperation.swift in Sources */,
 				63C9B60F240D9675006D587B /* SignInWithAppleButton.swift in Sources */,
 				63C9B61E240DA855006D587B /* UIViewController+Ext.swift in Sources */,
 				63C9B5FE240D8D38006D587B /* Errors.swift in Sources */,
+				637B625E240ED78E00123647 /* ConcurrentOperation.swift in Sources */,
 				63C9B5ED240D819C006D587B /* Notifications.swift in Sources */,
 				63C9B5E4240D78F4006D587B /* RoutingViewControllerDelegate.swift in Sources */,
 				63C9B5E6240D7968006D587B /* MenuOption.swift in Sources */,

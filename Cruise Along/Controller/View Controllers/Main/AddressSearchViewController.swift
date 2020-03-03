@@ -19,6 +19,7 @@ class AddressSearchViewController: UIViewController {
     let locationManager = CLLocationManager()
     var location: CLLocation?
     var results = [SearchAddress]()
+    let addressFetchQueue = OperationQueue()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,16 +85,17 @@ extension AddressSearchViewController: UISearchBarDelegate {
             !term.isEmpty else { return }
         guard let location = location?.coordinate else { return }
         clearOutTableView()
-        apiController.fetchAddresses(with: term, location: location) { [weak self] results in
-            guard let self = self else { return }
-            switch results {
-            case.success(let addresses):
-                self.results = addresses
-                self.tableView.reloadData()
-            case .failure(let error):
-                self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
-            }
+        let fetchAddressOperation = FetchAddressesOperation(searchTerm: term, location: location, apiController: apiController)
+        let completionOperation = BlockOperation {
+            guard let addresses = fetchAddressOperation.addresses else { return }
+            self.results = addresses
+            self.tableView.reloadData()
         }
+        
+        completionOperation.addDependency(fetchAddressOperation)
+        addressFetchQueue.addOperation(fetchAddressOperation)
+        OperationQueue.main.addOperation(completionOperation)
+        
         searchBar.resignFirstResponder()
         searchBar.text = ""
     }
