@@ -51,6 +51,7 @@ class RoutingViewController: UIViewController {
     // MARK: - UI Configuration
     private func configureUI() {
         view.addSubview(mapView)
+        mapView.frame = CGRect.zero
         view.addSubview(settingsButton)
         mapView.delegate = self
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +71,6 @@ class RoutingViewController: UIViewController {
     private func setupCard() {
         visualEffectView = UIVisualEffectView()
         visualEffectView.frame = self.view.frame
-        self.mapView.addSubview(visualEffectView)
         addressSearchViewController = AddressSearchViewController()
         addressSearchViewController.location = location
         self.addChild(addressSearchViewController)
@@ -129,14 +129,7 @@ class RoutingViewController: UIViewController {
                 geocoder.geocodeAddressString(address) { placemarks, error in
                     guard error == nil else { return }
                     guard let placemarks = placemarks, let location = placemarks.first?.location else { return }
-                    self.apiController.fetchRoutes(with: location.coordinate, origin: userLocation.coordinate) { results in
-                        switch results {
-                        case .success(let route):
-                            print(route)
-                        case .failure(let error):
-                            self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
-                        }
-                    }
+                    print("\(location)\(userLocation)")
                 }
             }
             animateTransitionIfNeeded(state: nextState, duration: 0.9)
@@ -150,8 +143,10 @@ class RoutingViewController: UIViewController {
                 switch state {
                 case .expanded:
                     self.addressSearchViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
+                    self.mapView.addSubview(self.visualEffectView)
                 case .collapsed:
                     self.addressSearchViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
+                    self.visualEffectView.removeFromSuperview()
                 }
             }
             
@@ -246,6 +241,7 @@ extension RoutingViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             addressSearchViewController.location = location
+            self.location = location
         }
     }
     
