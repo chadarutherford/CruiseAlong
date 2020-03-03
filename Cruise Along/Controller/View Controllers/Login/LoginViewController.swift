@@ -113,6 +113,7 @@ class LoginViewController: UIViewController {
     func signIn(with name: String) {
         let homeAddressVC = HomeAddressViewController()
         homeAddressVC.name = name
+        homeAddressVC.modalPresentationStyle = .fullScreen
         self.present(homeAddressVC, animated: true)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  HomeAddressViewController.swift
+//  WorkAddressViewController.swift
 //  Cruise Along
 //
 //  Created by Chad Rutherford on 3/3/20.
@@ -9,7 +9,7 @@
 import CoreData
 import UIKit
 
-class HomeAddressViewController: UIViewController {
+class WorkAddressViewController: UIViewController {
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -21,7 +21,7 @@ class HomeAddressViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Let's start with your home address:"
+        label.text = "And we will finish with your work address:"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .center
@@ -95,7 +95,7 @@ class HomeAddressViewController: UIViewController {
     let nextButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Next", for: .normal)
+        button.setTitle("Finish", for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.setTitleColor(.label, for: .normal)
         button.backgroundColor = .systemBackground
@@ -180,20 +180,19 @@ class HomeAddressViewController: UIViewController {
             let city = cityTextField.text, !city.isEmpty,
             let state = stateTextField.text, !state.isEmpty,
             let zipCode = zipCodeTextField.text, !zipCode.isEmpty else { return }
-        Address(name: name, streetAddress: address, city: city, state: state, zipCode: zipCode, type: .home)
+        Address(name: name, streetAddress: address, city: city, state: state, zipCode: zipCode, type: .work)
         do {
             try CoreDataCloudKitStack.shared.save()
-            let workAddressVC = WorkAddressViewController()
-            workAddressVC.name = name
-            workAddressVC.modalPresentationStyle = .fullScreen
-            self.present(workAddressVC, animated: true)
+            let containerVC = ContainerViewController()
+            containerVC.modalPresentationStyle = .fullScreen
+            self.present(containerVC, animated: true)
         } catch {
             presentCAAlertOnMainThread(title: "Error", message: "There was an error saving your address. Please try again.", buttonTitle: "Ok")
         }
     }
 }
 
-extension HomeAddressViewController: UITextFieldDelegate {
+extension WorkAddressViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }

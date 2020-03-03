@@ -10,6 +10,7 @@
 		637B6251240E9F0700123647 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6250240E9F0700123647 /* LoginViewController.swift */; };
 		637B6258240EA89C00123647 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637B6257240EA89C00123647 /* CloudKit.framework */; };
 		637B625A240EABE900123647 /* HomeAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6259240EABE900123647 /* HomeAddressViewController.swift */; };
+		637B625C240EB79B00123647 /* WorkAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B625B240EB79B00123647 /* WorkAddressViewController.swift */; };
 		638A82A6240D76860068745E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A5240D76860068745E /* ContainerViewController.swift */; };
 		638A82AA240D77680068745E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A9240D77680068745E /* MenuViewController.swift */; };
 		638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82AB240D77870068745E /* AddressSearchViewController.swift */; };
@@ -73,6 +74,7 @@
 		637B6255240EA89000123647 /* Cruise Along.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cruise Along.entitlements"; sourceTree = "<group>"; };
 		637B6257240EA89C00123647 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		637B6259240EABE900123647 /* HomeAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAddressViewController.swift; sourceTree = "<group>"; };
+		637B625B240EB79B00123647 /* WorkAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkAddressViewController.swift; sourceTree = "<group>"; };
 		638A82A5240D76860068745E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		638A82A9240D77680068745E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		638A82AB240D77870068745E /* AddressSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				637B6250240E9F0700123647 /* LoginViewController.swift */,
 				637B6259240EABE900123647 /* HomeAddressViewController.swift */,
+				637B625B240EB79B00123647 /* WorkAddressViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				63C9B5F6240D8AF1006D587B /* URLSession+NetworkDataLoader.swift in Sources */,
 				63C9B5E9240D7B63006D587B /* Constants.swift in Sources */,
 				63C9B60C240D9674006D587B /* CASettingsButton.swift in Sources */,
+				637B625C240EB79B00123647 /* WorkAddressViewController.swift in Sources */,
 				63C9B61A240DA73A006D587B /* Address+Convenience.swift in Sources */,
 				63C9B608240D9674006D587B /* CAAlertContainerView.swift in Sources */,
 			);
