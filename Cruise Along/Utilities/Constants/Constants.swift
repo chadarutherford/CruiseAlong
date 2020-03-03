@@ -16,6 +16,7 @@ enum Images {
 }
 
 enum APIKeys {
-    static let baseURL = "https://api.tomtom.com/search/2/search/"
+    static let baseAddressURL = "https://api.tomtom.com/search/2/search/"
     static let apiKey = "9fAquYIwQ4Aj3NRv3U28jM60VhBID1vR"
+    static let baseRouteURL = "https://api.tomtom.com/routing/1/calculateRoute"
 }

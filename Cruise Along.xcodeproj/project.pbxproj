@@ -42,6 +42,10 @@
 		63C9B61E240DA855006D587B /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B61D240DA855006D587B /* UIViewController+Ext.swift */; };
 		63C9B621240DACFA006D587B /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B620240DACFA006D587B /* SettingsTableViewCell.swift */; };
 		63C9B623240DB049006D587B /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B622240DB049006D587B /* AddressTableViewCell.swift */; };
+		63C9B625240DBCB9006D587B /* FormatUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B624240DBCB9006D587B /* FormatUtilities.swift */; };
+		63C9B629240DC2E5006D587B /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B628240DC2E5006D587B /* Route.swift */; };
+		63C9B62B240DD55F006D587B /* RouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B62A240DD55F006D587B /* RouteTests.swift */; };
+		63C9B62D240DD589006D587B /* RouteJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9B62C240DD589006D587B /* RouteJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +107,10 @@
 		63C9B61D240DA855006D587B /* UIViewController+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		63C9B620240DACFA006D587B /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		63C9B622240DB049006D587B /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		63C9B624240DBCB9006D587B /* FormatUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatUtilities.swift; sourceTree = "<group>"; };
+		63C9B628240DC2E5006D587B /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		63C9B62A240DD55F006D587B /* RouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTests.swift; sourceTree = "<group>"; };
+		63C9B62C240DD589006D587B /* RouteJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +191,8 @@
 				639BFFC5240C133200A0D635 /* Info.plist */,
 				63C9B5F0240D86BB006D587B /* AddressTests.swift */,
 				63C9B5F2240D86E7006D587B /* AddressJSON.swift */,
+				63C9B62A240DD55F006D587B /* RouteTests.swift */,
+				63C9B62C240DD589006D587B /* RouteJSON.swift */,
 			);
 			path = "Cruise AlongTests";
 			sourceTree = "<group>";
@@ -296,6 +306,7 @@
 		63C9B5FC240D8D2C006D587B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				63C9B624240DBCB9006D587B /* FormatUtilities.swift */,
 				63C9B5E5240D7968006D587B /* MenuOption.swift */,
 				63C9B5FD240D8D38006D587B /* Errors.swift */,
 				63C9B610240D976F006D587B /* CardState.swift */,
@@ -323,6 +334,7 @@
 			children = (
 				63C9B5EE240D82B2006D587B /* SearchAddress.swift */,
 				63C9B619240DA73A006D587B /* Address+Convenience.swift */,
+				63C9B628240DC2E5006D587B /* Route.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -494,8 +506,10 @@
 				63C9B5E1240D7835006D587B /* RoutingController.swift in Sources */,
 				63C9B621240DACFA006D587B /* SettingsTableViewCell.swift in Sources */,
 				639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */,
+				63C9B625240DBCB9006D587B /* FormatUtilities.swift in Sources */,
 				638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */,
 				63C9B609240D9674006D587B /* CAAlertVC.swift in Sources */,
+				63C9B629240DC2E5006D587B /* Route.swift in Sources */,
 				63C9B61C240DA753006D587B /* AddressType.swift in Sources */,
 				63C9B611240D976F006D587B /* CardState.swift in Sources */,
 				63C9B60E240D9675006D587B /* CAButton.swift in Sources */,
@@ -515,6 +529,8 @@
 			files = (
 				63C9B5F3240D86E7006D587B /* AddressJSON.swift in Sources */,
 				63C9B5F1240D86BB006D587B /* AddressTests.swift in Sources */,
+				63C9B62B240DD55F006D587B /* RouteTests.swift in Sources */,
+				63C9B62D240DD589006D587B /* RouteJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

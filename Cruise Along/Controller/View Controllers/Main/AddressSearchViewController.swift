@@ -68,6 +68,7 @@ class AddressSearchViewController: UIViewController {
         tableView.dataSource = self
         handleBar.layer.cornerRadius = 3.5
         handleBar.layer.masksToBounds = true
+        tableView.rowHeight = 60
         tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: AddressTableViewCell.reuseID)
     }
     
@@ -81,7 +82,18 @@ extension AddressSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let term = searchBar.text,
             !term.isEmpty else { return }
-        print(term)
+        guard let location = location?.coordinate else { return }
+        clearOutTableView()
+        apiController.fetchAddresses(with: term, location: location) { [weak self] results in
+            guard let self = self else { return }
+            switch results {
+            case.success(let addresses):
+                self.results = addresses
+                self.tableView.reloadData()
+            case .failure(let error):
+                self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
+            }
+        }
         searchBar.resignFirstResponder()
         searchBar.text = ""
     }
@@ -93,10 +105,13 @@ extension AddressSearchViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressTableViewCell.reuseID, for: indexPath) as? AddressTableViewCell else { return UITableViewCell() }
         let result = results[indexPath.row]
-        cell.textLabel?.text = result.address
-        cell.detailTextLabel?.text = "Test Data"
+        guard let location = location else { return UITableViewCell() }
+        let distance = location.distance(from: CLLocation(latitude: result.latitude, longitude: result.longitude))
+        let distanceString = FormatUtilities.formatDistance(meters: distance)
+        cell.addressLabel.text = result.address
+        cell.distanceLabel.text = distanceString
         return cell
     }
     

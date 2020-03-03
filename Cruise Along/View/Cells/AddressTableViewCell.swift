@@ -45,7 +45,7 @@ class AddressTableViewCell: UITableViewCell {
             addressLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -12),
             
             distanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            distanceLabel.bottomAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 8),
+            distanceLabel.bottomAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 12),
             distanceLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -12),
             distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
         ])

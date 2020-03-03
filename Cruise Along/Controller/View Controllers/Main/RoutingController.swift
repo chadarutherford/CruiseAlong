@@ -15,6 +15,7 @@ class RoutingViewController: UIViewController {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Properties
     let mapView = MKMapView()
+    var apiController: APIController!
     let settingsButton = CASettingsButton()
     weak var delegate: RoutingViewControllerDelegate?
     var location: CLLocation?
@@ -23,6 +24,7 @@ class RoutingViewController: UIViewController {
     var visualEffectView: UIVisualEffectView!
     let cardHeight: CGFloat = 700
     let cardHandleAreaHeight: CGFloat = 65
+    let regionInMeters: Double = 1_000
     var isCardVisible  = false
     var nextState: CardState {
         isCardVisible ? .collapsed : .expanded
@@ -36,6 +38,8 @@ class RoutingViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         setupCard()
+        setupAddressObservers()
+        checkLocationServices()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,9 +47,12 @@ class RoutingViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - UI Configuration
     private func configureUI() {
         view.addSubview(mapView)
-        mapView.addSubview(settingsButton)
+        view.addSubview(settingsButton)
+        mapView.delegate = self
         mapView.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
         NSLayoutConstraint.activate([
@@ -57,6 +64,7 @@ class RoutingViewController: UIViewController {
             settingsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             settingsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60)
         ])
+        apiController = APIController()
     }
     
     private func setupCard() {
@@ -64,7 +72,7 @@ class RoutingViewController: UIViewController {
         visualEffectView.frame = self.view.frame
         self.mapView.addSubview(visualEffectView)
         addressSearchViewController = AddressSearchViewController()
-        addressSearchViewController.location = locationManager.location
+        addressSearchViewController.location = location
         self.addChild(addressSearchViewController)
         view.addSubview(addressSearchViewController.view)
         addressSearchViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: cardHeight)
@@ -74,6 +82,13 @@ class RoutingViewController: UIViewController {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleCardPan(_:)))
         addressSearchViewController.handleArea.addGestureRecognizer(tapGesture)
         addressSearchViewController.handleArea.addGestureRecognizer(panGesture)
+    }
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Actions
+    
+    private func setupAddressObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAddressNotification(_:)), name: .addressWasSelected, object: nil)
     }
     
     @objc private func settingsButtonTapped() {
@@ -105,6 +120,30 @@ class RoutingViewController: UIViewController {
         }
     }
     
+    @objc private func handleAddressNotification(_ notification: NSNotification) {
+        let geocoder = CLGeocoder()
+        if let address = notification.userInfo?["address"] as? Address {
+            print(address)
+        } else if let address = notification.userInfo?["address"] as? String {
+            if let userLocation = locationManager.location {
+                geocoder.geocodeAddressString(address) { placemarks, error in
+                    guard error == nil else { return }
+                    guard let placemarks = placemarks, let location = placemarks.first?.location else { return }
+                    self.apiController.fetchRoutes(with: location.coordinate, origin: userLocation.coordinate) { results in
+                        switch results {
+                        case .success(let route):
+                            print(route)
+                        case .failure(let error):
+                            self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
+                        }
+                    }
+                }
+            }
+            animateTransitionIfNeeded(state: nextState, duration: 0.9)
+        }
+    }
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Animations
     private func animateTransitionIfNeeded(state: CardState, duration: TimeInterval) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
@@ -159,10 +198,58 @@ class RoutingViewController: UIViewController {
             animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
         }
     }
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Location
+    private func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            checkLocationAuthorization()
+            setupLocationManager()
+        } else {
+            presentCAAlertOnMainThread(title: "Error", message: "Please ensure location services are enabled on your device", buttonTitle: "Ok")
+        }
+    }
+    
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    private func centerViewOnUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    private func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            centerViewOnUserLocation()
+            mapView.showsUserLocation = true
+        case .denied:
+            self.presentCAAlertOnMainThread(title: "Error", message: "You have denied permissions for location services. Please enable them and return to the app.", buttonTitle: "Ok")
+        case .restricted:
+            self.presentCAAlertOnMainThread(title: "Error", message: "You have parental controls set up that prevent location services", buttonTitle: "Ok")
+        case .authorizedAlways:
+            break
+        @unknown default:
+            break
+        }
+    }
 }
 
-extension RoutingViewController: CLLocationManagerDelegate {
+extension RoutingViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        if let location = locations.first {
+            addressSearchViewController.location = location
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
     }
 }
