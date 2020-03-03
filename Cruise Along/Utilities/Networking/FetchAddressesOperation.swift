@@ -12,6 +12,7 @@ import Foundation
 class FetchAddressesOperation: ConcurrentOperation {
     
     var addresses: [SearchAddress]?
+    var error: Error?
     var apiController: APIController
     var searchTerm: String
     var location: CLLocationCoordinate2D
@@ -30,7 +31,7 @@ class FetchAddressesOperation: ConcurrentOperation {
             case .success(let addresses):
                 self.addresses = addresses
             case .failure(let error):
-                print(error)
+                self.error = error
             }
         }
     }

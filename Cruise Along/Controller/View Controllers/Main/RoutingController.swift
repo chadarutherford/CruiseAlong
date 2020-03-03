@@ -31,6 +31,7 @@ class RoutingViewController: UIViewController {
     }
     var runningAnimations = [UIViewPropertyAnimator]()
     var animationProgressWhenInterrupted: CGFloat = 0
+    let fetchRouteQueue = OperationQueue()
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - View Controller Life Cycle
@@ -122,24 +123,36 @@ class RoutingViewController: UIViewController {
     
     @objc private func handleAddressNotification(_ notification: NSNotification) {
         let geocoder = CLGeocoder()
+        var addressToGeocode: String = ""
         if let address = notification.userInfo?["address"] as? Address {
-            print(address)
+            guard let streetAddress = address.streetAddress,
+            let city = address.city,
+            let state = address.state,
+            let zipCode = address.zipCode else { return }
+            addressToGeocode = "\(streetAddress) \(city) \(state), \(zipCode)"
         } else if let address = notification.userInfo?["address"] as? String {
-            if let userLocation = locationManager.location {
-                geocoder.geocodeAddressString(address) { placemarks, error in
-                    guard error == nil else { return }
-                    guard let placemarks = placemarks, let location = placemarks.first?.location else { return }
-                    self.apiController.fetchRoutes(with: location.coordinate, origin: userLocation.coordinate) { results in
-                        switch results {
-                        case .success(let route):
-                            self.addPolylineToMap(with: route)
-                        case .failure(let error):
-                            self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
-                        }
-                    }
-                }
-            }
+            addressToGeocode = address
             animateTransitionIfNeeded(state: nextState, duration: 0.9)
+        }
+        
+        if let userLocation = locationManager.location?.coordinate {
+            geocoder.geocodeAddressString(addressToGeocode) { placemarks, error in
+                guard error == nil else { return }
+                guard let placemarks = placemarks, let location = placemarks.first?.location?.coordinate else { return }
+                let fetchRouteOperation = FetchRouteOperation(origin: userLocation, destination: location, apiController: self.apiController)
+                let completionOperation = BlockOperation {
+                    if let error = fetchRouteOperation.error {
+                        self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
+                    }
+                    
+                    guard let route = fetchRouteOperation.route else { return }
+                    self.addPolylineToMap(with: route)
+                }
+                
+                completionOperation.addDependency(fetchRouteOperation)
+                self.fetchRouteQueue.addOperation(fetchRouteOperation)
+                OperationQueue.main.addOperation(completionOperation)
+            }
         }
     }
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
