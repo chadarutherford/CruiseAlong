@@ -29,6 +29,7 @@ class AddressTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
+        print("Cell loading")
     }
     
     @available(*, unavailable)
@@ -40,14 +41,14 @@ class AddressTableViewCell: UITableViewCell {
         addSubview(addressLabel)
         addSubview(distanceLabel)
         NSLayoutConstraint.activate([
-            addressLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            addressLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -12),
+            addressLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            addressLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            addressLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -12),
             
-            distanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            distanceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             distanceLabel.bottomAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 12),
-            distanceLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -12),
-            distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            distanceLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -12),
+            distanceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
-    static let reuseID = String(describing: self)
+    static let reuseID = "SettingsCell"
     
     let iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -25,6 +25,7 @@ class SettingsTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Home"
         return label
     }()
     
@@ -33,14 +34,16 @@ class SettingsTableViewCell: UITableViewCell {
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Address"
         return label
     }()
     
-    var address: Address? {
-        didSet {
-            updateViews()
-        }
-    }
+    var address: Address?
+//    {
+//        didSet {
+//            updateViews()
+//        }
+//    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,14 +52,15 @@ class SettingsTableViewCell: UITableViewCell {
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        configureUI()
     }
     
     private func configureUI() {
-        backgroundColor = .darkGray
         addSubview(iconImageView)
         addSubview(descriptionLabel)
         addSubview(detailLabel)
+        backgroundColor = .darkGray
         NSLayoutConstraint.activate([
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
@@ -70,7 +74,7 @@ class SettingsTableViewCell: UITableViewCell {
             detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             detailLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 8),
             detailLabel.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -8),
-            detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
     }
     

@@ -13,11 +13,12 @@ class MenuViewController: UIViewController {
     
     var tableView: UITableView!
     weak var delegate: RoutingViewControllerDelegate?
-    var workAddresses = [Address]()
-    var homeAddresses = [Address]()
-    
+    var addresses = [Address]()
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("View Loaded")
         configureTableView()
         fetchAddresses()
     }
@@ -28,9 +29,8 @@ class MenuViewController: UIViewController {
         let moc = CoreDataCloudKitStack.shared.mainContext
         do {
             let results = try moc.fetch(fetchRequest)
-            self.workAddresses = results.filter { $0.type == "Work" }
-            self.homeAddresses = results.filter { $0.type == "Home" }
-            self.tableView.reloadData()
+            self.addresses = results
+            tableView.reloadData()
         } catch {
             self.presentCAAlertOnMainThread(title: "Error", message: "Error fetching addresses", buttonTitle: "Ok")
         }
@@ -43,6 +43,8 @@ class MenuViewController: UIViewController {
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseID)
         tableView.separatorStyle = .none
         tableView.rowHeight = 84
+        tableView.estimatedRowHeight = 84
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .darkGray
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +59,7 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,34 +67,32 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
-        guard let homeAddress = homeAddresses.first, let workAddress = workAddresses.first else { return UITableViewCell() }
-        switch indexPath.row {
-        case 0:
+//        let homeAddress = addresses[0]
+//        let workAddress = addresses[1]
+        if indexPath.row == 0 {
             cell.isUserInteractionEnabled = false
-            cell.detailLabel.text = homeAddress.name
-        case 1:
-            cell.address = homeAddress
-        case 2:
-            cell.address = workAddress
-        default:
+//            cell.detailLabel.text = homeAddress.name
+        } else if indexPath.row == 1 {
+//            cell.address = homeAddress
+        } else if indexPath.row == 2 {
+//            cell.address = workAddress
+        } else {
             cell.detailLabel.text = ""
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let menuOption = MenuOption(rawValue: indexPath.row)
         delegate?.handleMenuToggle()
-        switch indexPath.row {
-        case 1:
-            guard let address = homeAddresses.first else { return }
+        if indexPath.row == 1 {
+            let address = addresses[0]
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
-        case 2:
-            guard let address = workAddresses.first else { return }
+        } else if indexPath.row == 2 {
+            let address = addresses[1]
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
-        default:
-            break
         }
     }
 }

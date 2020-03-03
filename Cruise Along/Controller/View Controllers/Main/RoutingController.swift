@@ -129,7 +129,14 @@ class RoutingViewController: UIViewController {
                 geocoder.geocodeAddressString(address) { placemarks, error in
                     guard error == nil else { return }
                     guard let placemarks = placemarks, let location = placemarks.first?.location else { return }
-                    print("\(location)\(userLocation)")
+                    self.apiController.fetchRoutes(with: location.coordinate, origin: userLocation.coordinate) { results in
+                        switch results {
+                        case .success(let route):
+                            self.addPolylineToMap(with: route)
+                        case .failure(let error):
+                            self.presentCAAlertOnMainThread(title: "Error", message: error.localizedDescription, buttonTitle: "Ok")
+                        }
+                    }
                 }
             }
             animateTransitionIfNeeded(state: nextState, duration: 0.9)
@@ -210,9 +217,9 @@ class RoutingViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    private func centerViewOnUserLocation() {
+    private func centerViewOnUserLocation(with meters: Double) {
         if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: meters, longitudinalMeters: meters)
             mapView.setRegion(region, animated: true)
         }
     }
@@ -223,7 +230,7 @@ class RoutingViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-            centerViewOnUserLocation()
+            centerViewOnUserLocation(with: regionInMeters)
             mapView.showsUserLocation = true
         case .denied:
             self.presentCAAlertOnMainThread(title: "Error", message: "You have denied permissions for location services. Please enable them and return to the app.", buttonTitle: "Ok")
@@ -234,6 +241,22 @@ class RoutingViewController: UIViewController {
         @unknown default:
             break
         }
+    }
+    
+    func addPolylineToMap(with route: Route) {
+        let coordinates = route.points.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
+        let locationCount = coordinates.count
+        let geodesic = MKGeodesicPolyline(coordinates: coordinates, count: locationCount)
+        mapView.addOverlay(geodesic)
+        setVisibleMapArea(with: geodesic, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+        self.mapView.setUserTrackingMode(.follow, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.centerViewOnUserLocation(with: 100)
+        }
+    }
+    
+    func setVisibleMapArea(with polyline: MKPolyline, edgeInsets: UIEdgeInsets, animated: Bool = false) {
+        mapView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: edgeInsets, animated: animated)
     }
 }
 
@@ -247,5 +270,15 @@ extension RoutingViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let pr = MKPolylineRenderer(overlay: overlay)
+            pr.strokeColor = UIColor.systemBlue.withAlphaComponent(0.5)
+            pr.lineWidth = 5
+            return pr
+        }
+        return MKOverlayRenderer()
     }
 }

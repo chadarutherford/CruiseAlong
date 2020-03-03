@@ -12,12 +12,13 @@ class ContainerViewController: UIViewController {
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: -  Properties
-    var menuController: MenuViewController?
+    var menuController: MenuViewController!
     var centerController: UINavigationController!
     var isExpanding = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .darkGray
         self.view.isUserInteractionEnabled = true
         configureRoutingController()
     }
@@ -46,7 +47,7 @@ class ContainerViewController: UIViewController {
     
     private func configureMenuController() {
         if menuController == nil {
-            let menuController = MenuViewController()
+            menuController = MenuViewController()
             menuController.delegate = self
             view.insertSubview(menuController.view, at: 0)
             addChild(menuController)
