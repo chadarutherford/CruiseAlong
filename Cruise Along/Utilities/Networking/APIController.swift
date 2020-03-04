@@ -32,6 +32,7 @@ class APIController {
             completion(.failure(.invalidURL))
             return
         }
+        print(url)
         networkLoader.loadData(using: url) { data, response, error in
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -39,12 +40,14 @@ class APIController {
                 }
                 return
             }
-            guard let response = response, response.statusCode == 200 else {
+            
+            if let response = response, response.statusCode != 200 {
                 DispatchQueue.main.async {
                     completion(.failure(.invalidResponse))
                 }
                 return
             }
+            
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(.failure(.noData))
@@ -92,7 +95,7 @@ class APIController {
                 return
             }
 
-            guard let response = response, response.statusCode == 200 else {
+            if let response = response, response.statusCode != 200 {
                 DispatchQueue.main.async {
                     completion(.failure(.invalidResponse))
                 }

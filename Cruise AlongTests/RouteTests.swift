@@ -6,6 +6,7 @@
 //  Copyright © 2020 Chad Rutherford. All rights reserved.
 //
 
+import CoreLocation
 import XCTest
 @testable import Cruise_Along
 
@@ -27,6 +28,31 @@ class RouteTests: XCTestCase {
         XCTAssertNoThrow(route)
         XCTAssertNotNil(route)
         guard let point = route.points.first else { return }
+        XCTAssertNotNil(point)
+        XCTAssertEqual(40.39213, point.latitude, accuracy: 0.001)
+        XCTAssertEqual(-80.59451, point.longitude, accuracy: 0.001)
+    }
+    
+    func testMockFetchRoutes() {
+        let mockLoader = MockLoader()
+        mockLoader.data = routeData
+        var dataRoute: Route?
+        
+        let controller = APIController(networkLoader: mockLoader)
+        let routesExpectation = expectation(description: "Waiting for routes")
+        
+        controller.fetchRoutes(with: CLLocationCoordinate2D(latitude: 40.40010, longitude: -80.6037), origin: CLLocationCoordinate2D(latitude: 40.39213, longitude: -80.59451)) { results in
+            switch results {
+            case .success(let route):
+                dataRoute = route
+                routesExpectation.fulfill()
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
+        }
+        
+        wait(for: [routesExpectation], timeout: 2)
+        guard let route = dataRoute, let point = route.points.first else { return }
         XCTAssertNotNil(point)
         XCTAssertEqual(40.39213, point.latitude, accuracy: 0.001)
         XCTAssertEqual(-80.59451, point.longitude, accuracy: 0.001)

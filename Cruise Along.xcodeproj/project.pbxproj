@@ -17,6 +17,8 @@
 		638A82A6240D76860068745E /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A5240D76860068745E /* ContainerViewController.swift */; };
 		638A82AA240D77680068745E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82A9240D77680068745E /* MenuViewController.swift */; };
 		638A82AC240D77870068745E /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A82AB240D77870068745E /* AddressSearchViewController.swift */; };
+		639381BE240EFE0800313458 /* MockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639381BD240EFE0800313458 /* MockLoader.swift */; };
+		639381C0240F055500313458 /* UtilitiesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639381BF240F055500313458 /* UtilitiesTest.swift */; };
 		639BFFAD240C133100A0D635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BFFAC240C133100A0D635 /* AppDelegate.swift */; };
 		639BFFAF240C133100A0D635 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639BFFAE240C133100A0D635 /* SceneDelegate.swift */; };
 		639BFFB6240C133200A0D635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 639BFFB5240C133200A0D635 /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		638A82A5240D76860068745E /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		638A82A9240D77680068745E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		638A82AB240D77870068745E /* AddressSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
+		639381BD240EFE0800313458 /* MockLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoader.swift; sourceTree = "<group>"; };
+		639381BF240F055500313458 /* UtilitiesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTest.swift; sourceTree = "<group>"; };
 		639BFFA9240C133100A0D635 /* Cruise Along.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cruise Along.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		639BFFAC240C133100A0D635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		639BFFAE240C133100A0D635 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				63C9B5F2240D86E7006D587B /* AddressJSON.swift */,
 				63C9B62A240DD55F006D587B /* RouteTests.swift */,
 				63C9B62C240DD589006D587B /* RouteJSON.swift */,
+				639381BD240EFE0800313458 /* MockLoader.swift */,
+				639381BF240F055500313458 /* UtilitiesTest.swift */,
 			);
 			path = "Cruise AlongTests";
 			sourceTree = "<group>";
@@ -574,6 +580,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C9B5F3240D86E7006D587B /* AddressJSON.swift in Sources */,
+				639381BE240EFE0800313458 /* MockLoader.swift in Sources */,
+				639381C0240F055500313458 /* UtilitiesTest.swift in Sources */,
 				63C9B5F1240D86BB006D587B /* AddressTests.swift in Sources */,
 				63C9B62B240DD55F006D587B /* RouteTests.swift in Sources */,
 				63C9B62D240DD589006D587B /* RouteJSON.swift in Sources */,
