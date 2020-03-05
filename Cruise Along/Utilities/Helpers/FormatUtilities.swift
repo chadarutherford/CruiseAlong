@@ -8,6 +8,10 @@
 
 import Foundation
 
+var isUITesting: Bool {
+    return CommandLine.arguments.contains("UITesting")
+}
+
 class FormatUtilities {
     static func formatDistance(meters: Double) -> String {
         var floatValue: Float = 0.0

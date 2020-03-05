@@ -16,6 +16,8 @@ class RoutingViewController: UIViewController {
     // MARK: - Properties
     let mapView = MKMapView()
     var apiController: APIController!
+    var points: [MKMapPoint]!
+    var annotation: MKPointAnnotation!
     let settingsButton = CASettingsButton()
     weak var delegate: RoutingViewControllerDelegate?
     var location: CLLocation?
@@ -57,6 +59,7 @@ class RoutingViewController: UIViewController {
         mapView.delegate = self
         mapView.translatesAutoresizingMaskIntoConstraints = false
         settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        settingsButton.accessibilityIdentifier = "Settings"
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -257,13 +260,45 @@ class RoutingViewController: UIViewController {
     }
     
     func addPolylineToMap(with route: Route) {
-        let coordinates = route.points.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
-        let locationCount = coordinates.count
-        let geodesic = MKGeodesicPolyline(coordinates: coordinates, count: locationCount)
+        let coordinates = route.points.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }.reversed()
+        points = coordinates.map { MKMapPoint($0) }
+        let geodesic = MKGeodesicPolyline(points: points, count: points.count)
+        self.routeCoordinates = geodesic.coordinates
         mapView.addOverlay(geodesic)
         setVisibleMapArea(with: geodesic, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+        annotation = MKPointAnnotation()
+        annotation.coordinate = points[0].coordinate
+        mapView.addAnnotation(annotation)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.centerViewOnUserLocation(with: 100)
+            self.coordinateIndex = 0
+            self.routeCoordinates = geodesic.coordinates
+            self.demoDayMove()
+        }
+    }
+    
+    var routeCoordinates = [CLLocationCoordinate2D]()
+    
+    var coordinateIndex: Int! {
+        didSet {
+            guard coordinateIndex != routeCoordinates.count else { return }
+            demoDayMove()
+        }
+    }
+    
+    var averageAnimationTime: Double {
+        60 / Double(routeCoordinates.count)
+    }
+    
+    func demoDayMove() {
+        mapView.showsUserLocation = false
+        let coordinate = routeCoordinates[coordinateIndex]
+        UIView.animate(withDuration: averageAnimationTime, animations: {
+            self.mapView.setRegion(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)), animated: true)
+            self.annotation.coordinate = coordinate
+        }) { _ in
+            if self.coordinateIndex != self.routeCoordinates.count {
+                self.coordinateIndex += 1
+            }
         }
     }
     
@@ -278,6 +313,13 @@ extension RoutingViewController: CLLocationManagerDelegate, MKMapViewDelegate {
             addressSearchViewController.location = location
             self.location = location
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Bike")
+        annotationView.image = UIImage(named: Images.motorcycle)
+        annotationView.transform = CGAffineTransform(rotationAngle: 90)
+        return annotationView
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -32,6 +32,10 @@ class AddressSearchViewController: UIViewController {
         view.addSubview(handleArea)
         handleArea.addSubview(handleBar)
         handleArea.backgroundColor = .systemBackground
+        handleArea.accessibilityTraits = UIAccessibilityTraits.button
+        handleArea.accessibilityIdentifier = "Handle"
+        tableView.accessibilityIdentifier = "SearchTable"
+        searchBar.searchTextField.accessibilityIdentifier = "SearchBar"
         handleBar.backgroundColor = .darkGray
         view.addSubview(searchBar)
         view.addSubview(tableView)
@@ -110,10 +114,8 @@ extension AddressSearchViewController: UITableViewDataSource, UITableViewDelegat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AddressTableViewCell.reuseID, for: indexPath) as? AddressTableViewCell else { return UITableViewCell() }
         let result = results[indexPath.row]
         guard let location = location else { return UITableViewCell() }
-        print(location)
         let distance = location.distance(from: CLLocation(latitude: result.latitude, longitude: result.longitude))
         let distanceString = FormatUtilities.formatDistance(meters: distance)
-        print(distanceString)
         cell.addressLabel.text = result.address
         cell.distanceLabel.text = distanceString
         return cell

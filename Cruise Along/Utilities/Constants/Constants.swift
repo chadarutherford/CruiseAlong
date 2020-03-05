@@ -14,6 +14,7 @@ enum Images {
     static let workAddress = "briefcase"
     static let logout = "arrow.left.square"
     static let background = "onboardingBackground"
+    static let motorcycle = "motorcycle"
 }
 
 enum APIKeys {

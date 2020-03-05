@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		634FF2E3240FE8310002F627 /* MKMultiPoint+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF2E2240FE8310002F627 /* MKMultiPoint+Ext.swift */; };
+		634FF2E5240FF2870002F627 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF2E4240FF2870002F627 /* MapTests.swift */; };
+		634FF2E7240FF3730002F627 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF2E6240FF3730002F627 /* Coordinates.swift */; };
+		634FF2E9240FF6AF0002F627 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634FF2E8240FF6AF0002F627 /* CoreDataTests.swift */; };
 		637B6251240E9F0700123647 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6250240E9F0700123647 /* LoginViewController.swift */; };
 		637B6258240EA89C00123647 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 637B6257240EA89C00123647 /* CloudKit.framework */; };
 		637B625A240EABE900123647 /* HomeAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B6259240EABE900123647 /* HomeAddressViewController.swift */; };
@@ -75,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		634FF2E2240FE8310002F627 /* MKMultiPoint+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMultiPoint+Ext.swift"; sourceTree = "<group>"; };
+		634FF2E4240FF2870002F627 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
+		634FF2E6240FF3730002F627 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		634FF2E8240FF6AF0002F627 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		637B6250240E9F0700123647 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		637B6255240EA89000123647 /* Cruise Along.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cruise Along.entitlements"; sourceTree = "<group>"; };
 		637B6257240EA89C00123647 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -185,13 +193,6 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		638A82A8240D77510068745E /* Model Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Model Controller";
-			sourceTree = "<group>";
-		};
 		639BFFA0240C133000A0D635 = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +237,9 @@
 				63C9B62C240DD589006D587B /* RouteJSON.swift */,
 				639381BD240EFE0800313458 /* MockLoader.swift */,
 				639381BF240F055500313458 /* UtilitiesTest.swift */,
+				634FF2E4240FF2870002F627 /* MapTests.swift */,
+				634FF2E6240FF3730002F627 /* Coordinates.swift */,
+				634FF2E8240FF6AF0002F627 /* CoreDataTests.swift */,
 			);
 			path = "Cruise AlongTests";
 			sourceTree = "<group>";
@@ -264,7 +268,6 @@
 		639BFFDD240C138C00A0D635 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				638A82A8240D77510068745E /* Model Controller */,
 				638A82A7240D77430068745E /* View Controllers */,
 			);
 			path = Controller;
@@ -334,6 +337,7 @@
 				63C9B61D240DA855006D587B /* UIViewController+Ext.swift */,
 				63C9B5EC240D819C006D587B /* Notifications.swift */,
 				63C9B5F5240D8AF1006D587B /* URLSession+NetworkDataLoader.swift */,
+				634FF2E2240FE8310002F627 /* MKMultiPoint+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -547,6 +551,7 @@
 				639BFFAD240C133100A0D635 /* AppDelegate.swift in Sources */,
 				63C9B60A240D9674006D587B /* CABodyLabel.swift in Sources */,
 				63C9B618240DA6D9006D587B /* CruiseAlong.xcdatamodeld in Sources */,
+				634FF2E3240FE8310002F627 /* MKMultiPoint+Ext.swift in Sources */,
 				63C9B5F8240D8B9A006D587B /* NetworkDataLoader.swift in Sources */,
 				63C9B623240DB049006D587B /* AddressTableViewCell.swift in Sources */,
 				63C9B5EF240D82B2006D587B /* SearchAddress.swift in Sources */,
@@ -583,8 +588,11 @@
 				639381BE240EFE0800313458 /* MockLoader.swift in Sources */,
 				639381C0240F055500313458 /* UtilitiesTest.swift in Sources */,
 				63C9B5F1240D86BB006D587B /* AddressTests.swift in Sources */,
+				634FF2E5240FF2870002F627 /* MapTests.swift in Sources */,
+				634FF2E7240FF3730002F627 /* Coordinates.swift in Sources */,
 				63C9B62B240DD55F006D587B /* RouteTests.swift in Sources */,
 				63C9B62D240DD589006D587B /* RouteJSON.swift in Sources */,
+				634FF2E9240FF6AF0002F627 /* CoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

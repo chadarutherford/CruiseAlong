@@ -13,7 +13,8 @@ class MenuViewController: UIViewController {
     
     var tableView: UITableView!
     weak var delegate: RoutingViewControllerDelegate?
-    var addresses = [Address]()
+    var homeAddresses = [Address]()
+    var workAddresses = [Address]()
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
@@ -29,7 +30,8 @@ class MenuViewController: UIViewController {
         let moc = CoreDataCloudKitStack.shared.mainContext
         do {
             let results = try moc.fetch(fetchRequest)
-            self.addresses = results
+            self.homeAddresses = results.filter { $0.type == "Home" }
+            self.workAddresses = results.filter { $0.type == "Work" }
             tableView.reloadData()
         } catch {
             self.presentCAAlertOnMainThread(title: "Error", message: "Error fetching addresses", buttonTitle: "Ok")
@@ -40,6 +42,7 @@ class MenuViewController: UIViewController {
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.accessibilityIdentifier = "Menu"
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseID)
         tableView.separatorStyle = .none
         tableView.rowHeight = 84
@@ -67,8 +70,8 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let menuOption = MenuOption(rawValue: indexPath.row)
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
-        let homeAddress = addresses[0]
-        let workAddress = addresses[1]
+        let homeAddress = homeAddresses[0]
+        let workAddress = workAddresses[1]
         if indexPath.row == 0 {
             cell.isUserInteractionEnabled = false
             cell.detailLabel.text = homeAddress.name
@@ -85,11 +88,11 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.handleMenuToggle()
         if indexPath.row == 1 {
-            let address = addresses[0]
+            let address = homeAddresses[0]
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
         } else if indexPath.row == 2 {
-            let address = addresses[1]
+            let address = workAddresses[1]
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
         } else if indexPath.row == 3 {
