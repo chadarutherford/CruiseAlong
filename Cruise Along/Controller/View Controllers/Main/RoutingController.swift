@@ -18,6 +18,12 @@ class RoutingViewController: UIViewController {
     var apiController: APIController!
     var points: [MKMapPoint]!
     var annotation: MKPointAnnotation!
+    var annotationView: MKAnnotationView!
+    var heading: Double = 0 {
+        didSet {
+            changeHeading()
+        }
+    }
     let settingsButton = CASettingsButton()
     weak var delegate: RoutingViewControllerDelegate?
     var location: CLLocation?
@@ -246,6 +252,7 @@ class RoutingViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
         case .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
             centerViewOnUserLocation(with: regionInMeters)
             mapView.showsUserLocation = true
         case .denied:
@@ -266,6 +273,7 @@ class RoutingViewController: UIViewController {
         self.routeCoordinates = geodesic.coordinates
         mapView.addOverlay(geodesic)
         setVisibleMapArea(with: geodesic, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), animated: true)
+        self.mapView.userTrackingMode = .followWithHeading
         annotation = MKPointAnnotation()
         annotation.coordinate = points[0].coordinate
         mapView.addAnnotation(annotation)
@@ -305,6 +313,12 @@ class RoutingViewController: UIViewController {
     func setVisibleMapArea(with polyline: MKPolyline, edgeInsets: UIEdgeInsets, animated: Bool = false) {
         mapView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: edgeInsets, animated: animated)
     }
+    
+    func changeHeading() {
+        if let annotationView = self.annotationView {
+            annotationView.transform = CGAffineTransform(rotationAngle: CGFloat(heading * .pi / 180))
+        }
+    }
 }
 
 extension RoutingViewController: CLLocationManagerDelegate, MKMapViewDelegate {
@@ -315,10 +329,13 @@ extension RoutingViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.heading = newHeading.trueHeading
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Bike")
+        annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Bike")
         annotationView.image = UIImage(named: Images.motorcycle)
-        annotationView.transform = CGAffineTransform(rotationAngle: 90)
         return annotationView
     }
     

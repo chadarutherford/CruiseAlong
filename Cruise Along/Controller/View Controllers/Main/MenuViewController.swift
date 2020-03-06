@@ -71,7 +71,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         cell.descriptionLabel.text = menuOption?.description
         cell.iconImageView.image = menuOption?.image
         let homeAddress = homeAddresses[0]
-        let workAddress = workAddresses[1]
+        let workAddress = workAddresses[0]
         if indexPath.row == 0 {
             cell.isUserInteractionEnabled = false
             cell.detailLabel.text = homeAddress.name
@@ -92,7 +92,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
         } else if indexPath.row == 2 {
-            let address = workAddresses[1]
+            let address = workAddresses[0]
             let userInfo = ["address" : address]
             NotificationCenter.default.post(name: .addressWasSelected, object: self, userInfo: userInfo)
         } else if indexPath.row == 3 {

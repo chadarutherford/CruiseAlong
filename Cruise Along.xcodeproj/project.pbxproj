@@ -751,6 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cruise Along/Cruise Along.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P7DFWNNEL3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Cruise Along/Support/Info.plist";
@@ -771,6 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Cruise Along/Cruise Along.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P7DFWNNEL3;
 				INFOPLIST_FILE = "Cruise Along/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
