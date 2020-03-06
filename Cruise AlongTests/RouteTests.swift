@@ -21,6 +21,18 @@ class RouteTests: XCTestCase {
         XCTAssertEqual(-80.6037, point.longitude, accuracy: 0.001)
     }
     
+    func testInstruction() {
+        let decoder = JSONDecoder()
+        let instruction = try! decoder.decode(Instructions.self, from: instructionData)
+        XCTAssertNoThrow(instruction)
+        XCTAssertNotNil(instruction)
+        XCTAssertEqual(-90, instruction.turn)
+        XCTAssertEqual(true, instruction.combine)
+        XCTAssertEqual("Turn left onto Marland Heights Rd", instruction.message)
+        XCTAssertEqual("Turn left onto Marland Heights Rd then bear left at Marland Heights Rd", instruction.combinedMessage)
+        
+    }
+    
     func testRoute() {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -29,8 +41,10 @@ class RouteTests: XCTestCase {
         XCTAssertNotNil(route)
         guard let point = route.points.first else { return }
         XCTAssertNotNil(point)
-        XCTAssertEqual(40.39213, point.latitude, accuracy: 0.001)
-        XCTAssertEqual(-80.59451, point.longitude, accuracy: 0.001)
+        XCTAssertEqual(40.40001, point.latitude, accuracy: 0.001)
+        XCTAssertEqual(-80.60342, point.longitude, accuracy: 0.001)
+        guard let instruction = route.instructions.first else { return }
+        XCTAssertEqual("Leave from Rothrock Ave", instruction.message)
     }
     
     func testMockFetchRoutes() {
@@ -53,8 +67,10 @@ class RouteTests: XCTestCase {
         
         wait(for: [routesExpectation], timeout: 2)
         guard let route = dataRoute, let point = route.points.first else { return }
+        guard let instruction = route.instructions.first else { return }
         XCTAssertNotNil(point)
-        XCTAssertEqual(40.39213, point.latitude, accuracy: 0.001)
-        XCTAssertEqual(-80.59451, point.longitude, accuracy: 0.001)
+        XCTAssertEqual(40.40001, point.latitude, accuracy: 0.001)
+        XCTAssertEqual(-80.60342, point.longitude, accuracy: 0.001)
+        XCTAssertEqual("Leave from Rothrock Ave", instruction.message)
     }
 }

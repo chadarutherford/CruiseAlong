@@ -14,6 +14,7 @@ struct Route: Codable {
     let time: Int
     let arrivalTime: Date
     let points: [Point]
+    let instructions: [Instructions]
     
     enum RouteKeys: String, CodingKey {
         case routes
@@ -23,6 +24,8 @@ struct Route: Codable {
         case arrivalTime
         case legs
         case points
+        case guidance
+        case instructions
     }
     
     init(from decoder: Decoder) throws {
@@ -32,10 +35,12 @@ struct Route: Codable {
         let summaryContainer = try routeContainer.nestedContainer(keyedBy: RouteKeys.self, forKey: .summary)
         var legsContainer = try routeContainer.nestedUnkeyedContainer(forKey: .legs)
         let legContainer = try legsContainer.nestedContainer(keyedBy: RouteKeys.self)
+        let guidanceContainer = try routeContainer.nestedContainer(keyedBy: RouteKeys.self, forKey: .guidance)
         length = try summaryContainer.decode(Double.self, forKey: .length)
         time = try summaryContainer.decode(Int.self, forKey: .time)
         arrivalTime = try summaryContainer.decode(Date.self, forKey: .arrivalTime)
         points = try legContainer.decode([Point].self, forKey: .points)
+        instructions = try guidanceContainer.decode([Instructions].self, forKey: .instructions)
     }
 }
 
@@ -52,5 +57,30 @@ struct Point: Codable {
         let container = try decoder.container(keyedBy: PointKeys.self)
         latitude = try container.decode(Double.self, forKey: .latitude)
         longitude = try container.decode(Double.self, forKey: .longitude)
+    }
+}
+
+struct Instructions: Codable {
+    let turn: Double?
+    let point: Point
+    let combine: Bool
+    let message: String
+    let combinedMessage: String?
+    
+    enum InstructionKeys: String, CodingKey {
+        case turn = "turnAngleInDecimalDegrees"
+        case point
+        case combine = "possibleCombineWithNext"
+        case message
+        case combinedMessage
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: InstructionKeys.self)
+        turn = try container.decodeIfPresent(Double.self, forKey: .turn)
+        point = try container.decode(Point.self, forKey: .point)
+        combine = try container.decode(Bool.self, forKey: .combine)
+        message = try container.decode(String.self, forKey: .message)
+        combinedMessage = try container.decodeIfPresent(String.self, forKey: .combinedMessage)
     }
 }

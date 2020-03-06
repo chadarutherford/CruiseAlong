@@ -281,6 +281,7 @@ class RoutingViewController: UIViewController {
             self.coordinateIndex = 0
             self.routeCoordinates = geodesic.coordinates
             self.demoDayMove()
+//            self.createHUD()
         }
     }
     
@@ -308,6 +309,10 @@ class RoutingViewController: UIViewController {
                 self.coordinateIndex += 1
             }
         }
+    }
+    
+    private func createHUD() {
+        settingsButton.removeFromSuperview()
     }
     
     func setVisibleMapArea(with polyline: MKPolyline, edgeInsets: UIEdgeInsets, animated: Bool = false) {

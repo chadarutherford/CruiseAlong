@@ -77,6 +77,7 @@ class APIController {
         }
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
         urlComponents?.queryItems = [
+            URLQueryItem(name: "instructionsType", value: "text"),
             URLQueryItem(name: "avoid", value: "unpavedRoads"),
             URLQueryItem(name: "key", value: APIKeys.apiKey)
         ]
